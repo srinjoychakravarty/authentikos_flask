@@ -1,0 +1,68 @@
+<html>
+  <head>
+     <title>Authentikos Form</title>
+     <link rel = "stylesheet" media = "screen" href = "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+     <link rel = "stylesheet" href = "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css">
+     <meta name = "viewport" content = "width=device-width, initial-scale=1.0">
+  </head>
+  <body>
+    <div class = "container"><br>
+      <center>
+        <h2> Register News Agency </h2>
+      </center>
+    <div class="row align-items-center justify-content-center">
+    <div class="col-md-4">
+      <form action="/upload-image" method="POST" enctype="multipart/form-data">
+        <div class="form-group">
+          <hr>
+          <label>Upload image</label>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" name="image" id="image">
+            <label class="custom-file-label" for="image">Select image...</label>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Upload</button>
+      </form>
+      <form  action="" method="post" role="form">
+        {{ form.csrf }}
+        <div class="form-group">
+          <label for = "frn"> FCC Registration Number: </label>
+          <input type = "text" class="form-control" id="frn" name="frn" placeholder="0000000000-9999999999">
+          <br>
+          <label for="frn_expiry"> FRN Expiry Date: </label>
+          <input type="date" class="form-control" id="frn_expiry" name="frn_expiry" placeholder="YYYY-MM-DD">
+          <br>
+          <label for="domain">Domain Name:</label>
+	        <input type="text" class="form-control" id="domain" name="domain" placeholder="bbc.co.uk">
+          <br>
+	        <label for="facility_id">Facility Identifier:</label>
+	        <input type="facility_id" class="form-control" id="facility_id" name="facility_id" placeholder="0-99999">
+          </div>
+          <br>
+        <center>
+          <button type="submit" class="btn btn-success">Submit</button>
+        </center>
+      </form>
+      <br>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+        {% for message in messages %}
+            {% if "Error" not in message[1]: %}
+                <div class="alert alert-info">
+                <strong>Success! </strong> {{ message[1] }}
+                </div>
+            {% endif %}
+            {% if "Error" in message[1]: %}
+                <div class="alert alert-danger">
+                <strong>Error: </strong> {{ message[1] }}
+                </div>
+            {% endif %}
+        {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+    <br>
+    </div>
+    </div>
+  </body>
+</html>
